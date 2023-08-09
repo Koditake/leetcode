@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "unordered_set": "cpp",
+        "__tree": "cpp",
+        "bitset": "cpp",
+        "set": "cpp",
+        "unordered_map": "cpp"
+    }
+}
