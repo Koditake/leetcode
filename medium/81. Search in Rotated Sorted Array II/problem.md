@@ -11,11 +11,13 @@ You must decrease the overall operation steps as much as possible.
 Example 1:
 
 >   Input: nums = [2,5,6,0,0,1,2], target = 0
+> 
 >   Output: true
 
 Example 2:
 
 >   Input: nums = [2,5,6,0,0,1,2], target = 3
+> 
 >   Output: false
 
  
@@ -23,8 +25,11 @@ Example 2:
 Constraints:
 
 >    1 <= nums.length <= 5000
+> 
 >    -104 <= nums[i] <= 104
+> 
 >    nums is guaranteed to be rotated at some pivot.
+> 
 >    -104 <= target <= 104
 
  
