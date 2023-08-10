@@ -5,5 +5,9 @@
         "bitset": "cpp",
         "set": "cpp",
         "unordered_map": "cpp"
-    }
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none"
 }
