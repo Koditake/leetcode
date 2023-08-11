@@ -35,6 +35,7 @@ Example 2:
 Example 3:
 
 >   Input: amount = 10, coins = [10]
+> 
 >   Output: 1
 
  
@@ -42,6 +43,9 @@ Example 3:
 Constraints:
 
 >    1 <= coins.length <= 300
+> 
 >    1 <= coins[i] <= 5000
+> 
 >    All the values of coins are unique.
+> 
 >    0 <= amount <= 5000
