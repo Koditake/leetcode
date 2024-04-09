@@ -2,19 +2,24 @@ class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
         int n = nums.size();
-        
-        vector<int> output(n);
-        
-        output[0] = 1;
-        
-        for(int i=1; i<n; i++){
-            output[i] = output[i-1] * nums[i-1];
+
+        std::vector<int> res (n,1), 
+                        pre (n,1), post (n,1);
+
+        //pre
+        for (int i = 1; i < n; i++) {
+            pre[i] = pre[i - 1] * nums[i - 1];
         }
-        int right = 1;
-        for(int i=n-1; i>=0; i--){
-            output[i] *= right;
-            right *= nums[i];
+
+        //post
+        for (int i = n - 2; i >= 0; i--) {
+            post[i] = post[i + 1] * nums[i + 1];
         }
-        return output;
+
+        for (int i = 0; i < n; i++) {
+            res[i] = post[i] * pre[i];
+        }
+
+        return res;
     }
 };
