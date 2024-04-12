@@ -14,9 +14,11 @@ impl Solution {
         while left < right {
             let vol = height[left].min(height[right]) * ((right - left) as i32);
             volMax = volMax.max(vol);
-            match height[left].cmp(&height[right]) {
-                std::cmp::Ordering::Greater => right -= 1,
-                _ => left += 1,
+            
+            if height[left] > height[right] {
+                right -= 1;
+            } else {
+                left += 1;
             }
         }
         
