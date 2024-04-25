@@ -1,20 +1,23 @@
 class Solution {
-private:
-    int dp[38];
 public:
     int tribonacci(int n) {
         if (n == 0) {
             return 0;
         }
+        
         if (n == 1 || n == 2) {
             return 1;
         }
         
-        if (dp[n]) {
-            return dp[n];
-        }
-    
+        std::vector<int> res (n + 1, 0);
+        res[1] = 1,
+        res[2] = 1;
+
         
-        return dp[n] = tribonacci(n - 1) + tribonacci(n - 2) + tribonacci(n - 3);
+        for (int i = 3; i <= n; i++) {
+            res[i] = res[i - 1] + res[i - 2] + res[i - 3];
+        }
+        
+        return res[n];
     }
 };
