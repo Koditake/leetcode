@@ -1,19 +1,16 @@
 class Solution {
 public:
     int tribonacci(int n) {
-        if (n == 0) return 0;
-        if (n < 3) return 1;
-        //if (n == 4) return 2;
-
-        int a = 0; int b = 1; int c = 1;
-        int sum;
-        for (int i = 3; i <= n; i++)
-        {
-            sum = a + b + c;
-            a = b;
-            b = c;
-            c = sum;
+        if (n < 1) {
+            return 0;
         }
-        return sum;
+        if (n < 3) {
+            return 1;
+        }
+        
+        int dp[] = {0, 1, 1};
+        for (int i = 3; i <= n; ++i)
+            dp[i % 3] = dp[0] + dp[1] + dp[2];
+        return dp[n % 3];
     }
 };
