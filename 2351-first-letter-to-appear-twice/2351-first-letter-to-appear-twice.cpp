@@ -1,17 +1,15 @@
 class Solution {
 public:
     char repeatedCharacter(string s) {
-        std::set<char> set_s;
-        char res;
+        int s_set[26] = {0};
         
         for (auto &c:s) {
-            if (!set_s.contains(c)) {
-                set_s.insert(c);
-            } else {
-                return res = c;
-            }
+            if (s_set[c - 'a']) 
+                return c;
+            else
+                ++s_set[c - 'a'];
         }
         
-        return res;
+        return ' ';
     }
 };
