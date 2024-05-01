@@ -1,27 +1,23 @@
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        int n = nums.size();
-
-        //heap of pair <freq,element>
-
-        unordered_map<int,int> map;
-
-        for (int& i:nums) {
-            map[i]++;
+        std::unordered_map<int, int> map;
+        std::vector<int> res;
+        for (auto &num:nums) {
+            map[num]++;
         }
-
-        priority_queue<pair<int,int>> heap;
-        vector<int> result;
-
-        for (auto& [elem,freq]:map) {
-            heap.push(make_pair(freq, elem));
-            if (heap.size() > (int)map.size() - k){
-                result.push_back(heap.top().second);
-                heap.pop();
+        
+        std::priority_queue<std::pair<int,int>> p_queue;
+        
+        for (auto &[num,cnt]:map) {
+            p_queue.push({cnt,num});
+            
+            if (p_queue.size() > map.size() - k) {
+                res.push_back(p_queue.top().second);
+                p_queue.pop();
             }
         }
-
-        return result;
+        
+        return res;
     }
 };
