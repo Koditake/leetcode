@@ -1,23 +1,12 @@
-class Solution {
-public:
-    auto reverseWord(std::string &word, int right) -> void {
-        // in-place word reverse
-        int left = 0;
-        while (left < right) {
-            std::swap(word[left], word[right]);
-            left++;
-            right--;
-        }
-    }
-    
-    string reversePrefix(string word, char ch) {
-        for (int i = 0; i < word.size(); ++i) {
-            if (word[i] == ch) {
-                reverseWord(word,i);
-                break;
+impl Solution {
+    pub fn reverse_prefix(word: String, ch: char) -> String {
+        match word.split_once(ch) {
+            Some((pre, post)) => {
+                ch.to_string() +
+                &pre.chars().rev().collect::<String>() +
+                post
             }
+            None => word
         }
-        
-        return word;
     }
-};
+}
