@@ -1,22 +1,25 @@
+use std::collections::HashMap;
+
 impl Solution {
     pub fn is_anagram(s: String, t: String) -> bool {
         if s.len() != t.len() {
             return false;
         }
-
-        let mut char_counts = [0; 26]; // Initialize array for character counts
-
+        
+        let mut map = HashMap::new();
+        
         for c in s.chars() {
-            char_counts[c as usize - 97] += 1; // Increment count for current char
+            *map.entry(c).or_insert(0) += 1;
         }
-
+        
         for c in t.chars() {
-            char_counts[c as usize - 97] -= 1; // Decrement count for characters in t
-            if char_counts[c as usize - 97] < 0 {
-                return false;
+            *map.entry(c).or_insert(0) -= 1;
+            let count = map[&c];
+            if count < 0 {
+              return false;
             }
         }
-
-        true
+        
+        return true;
     }
 }
