@@ -18,9 +18,9 @@ public:
             if (fast == slow) {
                 return true;
             }
-            
-            // fast = fast->next;
         }
+        
+        fast = slow = nullptr;
         
         return false;
     }
