@@ -10,7 +10,7 @@ impl Solution {
 
         for r in 0..n {
           if !charset.contains(&char_arr[r]) { // Use contains to check for existence
-            res = std::cmp::max(res, (r - l + 1) as i32);
+            res = res.max((r - l + 1) as i32);
           } else {
             while charset.contains(&char_arr[r]) {
               charset.remove(&char_arr[l]);
