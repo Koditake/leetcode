@@ -29,6 +29,9 @@ public:
             else
                 curr = curr->next;
         }
+        
+        curr = nullptr;
+        
         return head;
     }
 };
