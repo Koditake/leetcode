@@ -16,13 +16,13 @@ public:
             return nullptr;
         }
         
-        auto *left = root->left,
-                *right = root->right;
+        auto *temp = root->left;
         
-        root->left = invertTree(right),
-        root->right = invertTree(left);
         
-        left = right = nullptr;
+        root->left = invertTree(root->right),
+        root->right = invertTree(temp);
+        
+        temp = nullptr;
         
         return root;
     }
