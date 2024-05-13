@@ -11,33 +11,13 @@
  */
 class Solution {
 public:
+    
+    
     int maxDepth(TreeNode* root) {
         if (!root) {
             return 0;
         }
         
-        int res = 0;
-        std::queue<TreeNode *> q;
-        q.push(root);
-
-        while(!q.empty()) {
-            ++res;
-            int n = q.size();
-            
-            for (n; n > 0; --n) {
-                TreeNode *t = q.front();
-                q.pop();
-                if (t->left) {
-                    q.push(t->left);
-                }
-
-                if (t->right) {
-                    q.push(t->right);
-                }
-            }
-        }
-        
-        root->left = root->right = nullptr;
-        return res;
+        return 1 + std::max(maxDepth(root->left),maxDepth(root->right));
     }
 };
