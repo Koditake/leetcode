@@ -20,19 +20,16 @@ use std::rc::Rc;
 use std::cell::RefCell;
 impl Solution {
     pub fn evaluate_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        Self::evaluate_tree_impl(&root)
+    }
+
+    fn evaluate_tree_impl(root: &Option<Rc<RefCell<TreeNode>>>) -> bool {
         let node = root.as_ref().unwrap().borrow();
-        
         match node.val {
-            0 => false,
+            3 => Self::evaluate_tree_impl(&node.left) && Self::evaluate_tree_impl(&node.right),
+            2 => Self::evaluate_tree_impl(&node.left) || Self::evaluate_tree_impl(&node.right),
             1 => true,
-            2 => {
-                Self::evaluate_tree(node.left.clone())
-                    || Self::evaluate_tree(node.right.clone())
-            },
-            _ => {
-                Self::evaluate_tree(node.left.clone())
-                    && Self::evaluate_tree(node.right.clone())
-            }
+            _ => false,
         }
     }
 }
