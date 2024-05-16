@@ -1,25 +1,38 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    bool evaluateTree(TreeNode* root) {
-        switch(root->val) {
-        case 0:
-        case 1:
-            return root->val;
-        case 2:
-            return evaluateTree(root->left) || evaluateTree(root->right);
-        default:
-            return evaluateTree(root->left) && evaluateTree(root->right);
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+// 
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
+use std::rc::Rc;
+use std::cell::RefCell;
+impl Solution {
+    pub fn evaluate_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        let node = root.as_ref().unwrap().borrow();
+        
+        match node.val {
+            0 => false,
+            1 => true,
+            2 => {
+                Self::evaluate_tree(node.left.clone())
+                    || Self::evaluate_tree(node.right.clone())
+            },
+            _ => {
+                Self::evaluate_tree(node.left.clone())
+                    && Self::evaluate_tree(node.right.clone())
+            }
         }
     }
-};
+}
