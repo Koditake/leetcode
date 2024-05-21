@@ -1,19 +1,17 @@
 impl Solution {
     pub fn search_matrix(matrix: Vec<Vec<i32>>, target: i32) -> bool {
-        let rows: i32 = (matrix.len()) as i32;
-        let columns: i32 = (matrix[0].len()) as i32;
-
-        let mut start : i32 = 0;
-        let mut end : i32 = (rows * columns - 1) as i32;
-        while start <= end {
-            let mid = start + (end - start)/2;
-            let mid_value = matrix[mid as usize / columns as usize][mid as usize % columns as usize];
-            if mid_value == target{
+        let rows = matrix.len();
+        let cols = matrix[0].len();
+        let mut r = 0 as i32;
+        let mut c = cols as i32 - 1;
+        while r < rows as i32 && c as i32 >= 0 {
+            let curr = matrix[r as usize][c as usize];
+            if curr == target {
                 return true;
-            } else if mid_value < target{
-                start = mid + 1;
+            } else if curr < target {
+                r += 1;
             } else {
-                end = mid - 1;
+                c -= 1;
             }
         }
         false
