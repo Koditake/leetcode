@@ -1,9 +1,7 @@
 impl Solution {
     pub fn search_matrix(matrix: Vec<Vec<i32>>, target: i32) -> bool {
-        // let (m, n) = (matrix.len(), matrix[0].len());
-        let m = matrix.len();
-        let n = matrix[0].len();
-        
+        let (m, n) = (matrix.len(), matrix[0].len());
+
         if target < matrix[0][0] || matrix[m - 1][n - 1] < target {
             // target overmatched matrix
             return false;
@@ -25,17 +23,17 @@ impl Solution {
             }
         }    
         
-        /*
-        // Check if the row has only one element
-        if n == 1 {
-          return matrix[h][0] == target;
-        }
-        */
-        
         // h is now live and contain the row of target
+        // commence 2nd binary search in row h
         let (mut l, mut r) = (0, n - 1);
         
         while l < r {
+            /************************************* 
+            // IMPORTANT: the crux of the issue is that mid have the potential to overflow 
+            // in case of very large row size, it is necessary to treat potential overflow
+            // in Rust, we use mid.wrapping_add(1)
+            // in C++, a "mid >> 1" is the low-level equivalent.
+            *************************************/
             let mid = (l + (r - l)/2).wrapping_add(/* usize */ 1);
             let val = matrix[h][mid];
             if target > val {
