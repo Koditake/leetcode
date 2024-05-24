@@ -1,27 +1,18 @@
 class Solution {
 public:
-    bool isValid(string& s) {
-        int n = s.size();
-
-        if (n % 2) {
-            return false;
+    bool isValid(string s) {
+        std::stack<char> cstk;
+        
+        for (auto &c:s) {
+            if (!cstk.empty() && 
+                       ((cstk.top() == '(' && c == ')') || 
+                       (cstk.top() == '[' && c == ']') || 
+                       (cstk.top() == '{' && c == '}'))
+                      ) {
+                    cstk.pop();
+                }  else
+                cstk.push(c);
         }
-
-        stack<char> stk;
-
-        for (char c:s) {
-            if (c == '{' || c == '[' || c == '(') {
-                stk.push(c);
-            }
-
-            else {
-                if (stk.empty() || (c == ')' && stk.top() != '(') || (c == ']' && stk.top() != '[') || (c == '}' && stk.top() != '{')) {
-                    return false;
-                }
-                stk.pop();
-            }
-        }
-
-        return stk.empty();
+        return cstk.empty();
     }
 };
