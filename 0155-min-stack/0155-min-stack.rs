@@ -1,51 +1,49 @@
-class MinStack {
-private:
-    std::stack<int> mainStack;
-    std::stack<int> subStack;
-public:
-    MinStack() {
-        // default constructor
-    }
-    
-    void push(int val) {
-        if (subStack.empty()) {
-            subStack.push(val);
-        } else 
-        if (subStack.top() >= val) {
-            subStack.push(val);
-        }
+struct MinStack {
+    stack: Vec<i32>,
+    min_stack: Vec<i32>,
+}
 
-        mainStack.push(val);
-    }
-    
-    void pop() {
-        if (mainStack.top() == subStack.top() && !subStack.empty()) {
-            subStack.pop();
-        }
 
-        mainStack.pop();
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl MinStack {
+    fn new() -> Self {
+        Self {
+            stack: vec![],
+            min_stack: vec![],
+        }
     }
-    
-    int top() {
-        if (!mainStack.empty())
-            return mainStack.top();
-        
-        return 0;
+
+    fn push(&mut self, val: i32) {
+        self.stack.push(val);
+        if self.min_stack.is_empty() || Some(&val) <= self.min_stack.last() {
+            self.min_stack.push(val);
+        }
     }
-    
-    int getMin() {
-        if (!subStack.empty())
-            return subStack.top();
-        
-        return 0;
+
+    fn pop(&mut self) {
+        let val = self.stack.pop().unwrap();
+        if Some(&val) == self.min_stack.last() {
+            self.min_stack.pop();
+        }
     }
-};
+
+    fn top(&self) -> i32 {
+        self.stack.last().cloned().unwrap()
+    }
+
+    fn get_min(&self) -> i32 {
+        self.min_stack.last().cloned().unwrap()
+    }
+}
 
 /**
  * Your MinStack object will be instantiated and called as such:
- * MinStack* obj = new MinStack();
- * obj->push(val);
- * obj->pop();
- * int param_3 = obj->top();
- * int param_4 = obj->getMin();
+ * let obj = MinStack::new();
+ * obj.push(val);
+ * obj.pop();
+ * let ret_3: i32 = obj.top();
+ * let ret_4: i32 = obj.get_min();
  */
