@@ -1,25 +1,18 @@
-class Solution {
-public:
-    int myAtoi(std::string str) {
-        int sign = 1, 
-            base = 0, 
-            i = 0;
-        while (str[i] == ' ') { 
-            i++; 
-        }
+impl Solution {
+    pub fn my_atoi(s: String) -> i32 {
+        let s = s.trim_start();
         
-        if (str[i] == '-' || str[i] == '+') {
-            sign = 1 - 2 * (str[i++] == '-'); 
-        }
+        let (s, sign) = match s.strip_prefix('-') {
+            Some(s) => (s, -1),
+            None => (s.strip_prefix('+').unwrap_or(s), 1),
+        };
         
-        while (str[i] >= '0' && str[i] <= '9') {
-            if (base >  INT_MAX / 10 || (base == INT_MAX / 10 && str[i] - '0' > 7)) {
-                if (sign == 1) return INT_MAX;
-                else return INT_MIN;
-            }
-            base  = 10 * base + (str[i++] - '0');
-        }
-        
-        return base * sign;
+        s.chars()
+            .map(|c| c.to_digit(10))
+            .take_while(Option::is_some)
+            .flatten()
+            .fold(0, |acc, digit| {
+                acc.saturating_mul(10).saturating_add(sign * digit as i32)
+            })
     }
-};
+}
