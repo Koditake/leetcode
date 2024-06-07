@@ -9,6 +9,11 @@ impl Solution {
             return false;
         }
         
+        //check if target is at begin/end matrix
+        if target == matrix[0][0] || matrix[row - 1][col - 1] == target {
+            return true;
+        }
+        
         let mut l = 0;
         let mut r = row * col - 1;
         
