@@ -1,30 +1,32 @@
 class Solution {
 public:
+    auto kokoEatBanan(std::vector<int> &piles, int speed) -> long {
+        long res = 0;
+        for (auto &pile:piles) {
+            res += ceil((double)pile/speed);
+        }
+        
+        return res;
+    }
+    
     int minEatingSpeed(vector<int>& piles, int h) {
         int n = piles.size();
         
-        int low = 1;
-        int high = 0;
-        for (int i = 0; i < n; i++) {
-            high = max(high, piles[i]);
+        int l = 1,
+            r = *std::max_element(piles.begin(),piles.end());
+        int res = r;
+        while (l <= r) {
+            int m = l + (r - l)/2; //banan per hour
+            long v = kokoEatBanan(piles, m); //time to eat wrt to speed
+            
+                if (h >= v) {
+                    res = std::min(res,m);
+                    r = m - 1;
+                } else {
+                    l = m + 1;
+                }  
         }
         
-        int result = high;
-        
-        while (low <= high) {
-            int k = low + (high - low) / 2;
-            long int hours = 0;
-            for (int i = 0; i < n; i++) {
-                hours += ceil((double) piles[i] / k);
-            }
-            if (hours <= h) {
-                result = min(result, k);
-                high = k - 1;
-            } else {
-                low = k + 1;
-            }
-        }
-        
-        return result;
+        return res;
     }
 };
