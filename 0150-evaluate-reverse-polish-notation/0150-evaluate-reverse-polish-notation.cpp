@@ -12,20 +12,6 @@ public:
                 int operandOne = decoder.top();
                 decoder.pop();
                 int result;
-                /*
-                switch (s) {
-                    case "+":
-                        result = operandOne + operandTwo;
-                    case "-":
-                        result = operandOne - operandTwo;
-                    case "*":
-                        result = operandOne * operandTwo;
-                    case "/":
-                        result = operandOne / operandTwo;
-                    default:
-                        continue;
-                }
-                */
 
                 if (s == "+") {
                     result = operandOne + operandTwo;
