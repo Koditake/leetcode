@@ -1,14 +1,11 @@
 impl Solution {
     pub fn height_checker(heights: Vec<i32>) -> i32 {
-        let mut expected = heights.clone();
-        expected.sort();
-        let mut res = 0;
-        for i in 0..heights.len() {
-            if heights[i] != expected[i] {
-                res += 1;
-            }
-        }
-        
-        res
+        let mut heights_sort = heights.clone();
+        heights_sort.sort_unstable();
+        heights
+            .iter()
+            .zip(heights_sort.iter())
+            .filter(|(h, hs)| h != hs)
+            .count() as i32
     }
 }
