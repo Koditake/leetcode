@@ -1,9 +1,6 @@
 class Solution {
 public:
-    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
-        int m = arr1.size(),
-            n = arr2.size();
-        
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {        
         std::vector<int> arr3;
         
         // give us map with asc order
