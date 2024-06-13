@@ -1,18 +1,18 @@
 class Solution {
 public:
-    inline auto helper(int m, int n, std::vector<std::vector<int>> &res) -> int {
+    int uniquePaths(int m, int n) {
         if (m == 1 || n == 1) {
             return 1;
         }
         
-        if (res[m][n]) {
-            return res[m][n];
+        std::vector<std::vector<int>> dp (m, std::vector (n,1));
+        
+        for (int i = 1; i < m; ++i) {
+            for (int j = 1; j < n; ++j) {
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1] ;
+            }
         }
         
-        return res[m][n] = helper(m - 1, n, res) + helper(m, n - 1, res);
-    }
-    int uniquePaths(int m, int n) {
-        std::vector<std::vector<int>> res (m + 1, std::vector(n + 1,0));
-        return helper(m,n,res);
+        return dp[m - 1][n - 1];
     }
 };
