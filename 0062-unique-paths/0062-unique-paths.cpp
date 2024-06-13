@@ -1,15 +1,18 @@
 class Solution {
-private:
-    int dp[101][101];
 public:
-    int uniquePaths(int m, int n) {      
+    auto helper(int m, int n, std::vector<std::vector<int>> &res) -> int {
         if (m == 1 || n == 1) {
             return 1;
         }
         
-        if (dp[m][n])
-            return dp[m][n];
+        if (res[m][n]) {
+            return res[m][n];
+        }
         
-        return dp[m][n] = uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+        return res[m][n] = helper(m - 1, n, res) + helper(m, n - 1, res);
+    }
+    int uniquePaths(int m, int n) {
+        std::vector<std::vector<int>> res (m + 1, std::vector(n + 1,0));
+        return helper(m,n,res);
     }
 };
