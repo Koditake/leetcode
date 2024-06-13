@@ -1,6 +1,6 @@
 class Solution {
 public:
-    auto helper(int m, int n, std::vector<std::vector<int>> &res) -> int {
+    inline auto helper(int m, int n, std::vector<std::vector<int>> &res) -> int {
         if (m == 1 || n == 1) {
             return 1;
         }
