@@ -1,6 +1,7 @@
 class Solution {
 public:
     vector<int> targetIndices(vector<int>& nums, int target) {
+        ///bucket sort using map
         sort(nums.begin(), nums.end());
         std::vector<int> res;
         std::unordered_map<int, std::vector<int>> map;
