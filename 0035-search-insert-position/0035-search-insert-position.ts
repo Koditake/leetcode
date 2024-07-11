@@ -3,7 +3,7 @@ function searchInsert(nums: number[], target: number): number {
         r:number = nums.length - 1
     
     while (l <= r) {
-        let m = Math.floor((l + r)/2)
+        let m = l + Math.floor((r - l)/2)
         
         if (nums[m] > target) {
             r = m - 1;
