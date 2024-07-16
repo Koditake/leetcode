@@ -17,12 +17,12 @@ impl Solution {
         let mut l = 0;
         let mut r = row * col - 1;
         
-        while l <= r {
+        while l < r {
             let m = l + (r - l)/2;
             let v = matrix[m / col][m % col];
             
             match target.cmp(&v) {
-                Ordering::Less => r = m - 1,
+                Ordering::Less => r = m,
                 Ordering::Greater => l = m + 1,
                 Ordering::Equal => return true,
             }
