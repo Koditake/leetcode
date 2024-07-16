@@ -6,8 +6,9 @@
 # def guess(num: int) -> int:
 
 class Solution:
+    @cache
     def guessNumber(self, n: int) -> int:
-        l, r = 0, n
+        l, r = 1, n
         while l <= r:
             m = l + (r - l) // 2
             
