@@ -7,12 +7,10 @@ impl Solution {
 		let (mut l, mut r) = (0, n);
         
         while l < r {
-            let m = l + (r - l)/2;
-            
-            if self.isBadVersion(m) {
-                r = m
+            if self.isBadVersion(l + (r - l)/2) {
+                r = l + (r - l)/2
             } else {
-                l = m + 1
+                l = l + (r - l)/2 + 1
             }
         }
         
