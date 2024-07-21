@@ -1,18 +1,20 @@
-class Solution {
-public:
-    int singleNonDuplicate(vector<int>& nums) {
-        int l = 0,
-            r = nums.size() - 1;
-        
-        while (l < r) {
-            int m = l + (r - l)/2;
+impl Solution {
+    pub fn single_non_duplicate(nums: Vec<i32>) -> i32 {
+        let mut l = 0;
+        let mut r = nums.len() as i32 - 1;
+
+        while l < r {
+            let m = l + (r - l) / 2;
+            let num = nums[m as usize];
+            let num_cmp = if m % 2 == 0 { nums[(m + 1) as usize] } else { nums[(m - 1) as usize] };
             
-            if ((m % 2 == 0 && nums[m] == nums[m + 1]) || (m % 2 == 1 && nums[m] == nums[m - 1]))
-               l = m + 1;
-            else 
+            if num == num_cmp {
+                l = m + 1;
+            } else {
                 r = m;
+            }
         }
-        
-        return nums[l];
+
+        nums[l as usize]
     }
-};
+}
