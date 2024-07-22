@@ -5,12 +5,14 @@ impl Solution {
         
         while l < r {
             let m = l + (r - l)/2;
-            let (mid_m, mid_a) = (arr[m as usize], arr[(m + 1) as usize]);
+            let (mid_m, mid_b, mid_a) = (arr[m as usize], arr[(m - 1) as usize], arr[(m + 1) as usize]);
             
-            if (mid_m < mid_a) {
+            if (mid_b < mid_m && mid_m < mid_a) {
                 l = m + 1;
-            } else {
+            } else if (mid_b > mid_m && mid_m > mid_a) {
                 r = m;
+            } else {
+                return m;
             }
         }
         
