@@ -16,11 +16,8 @@ impl Solution {
         map.sort_by_key(|&(height, _)| Reverse(height));
         
         // Extract names into result vector
-        let mut res: Vec<String> = Vec::with_capacity(n);
-        for i in 0..n {
-            res.push(map[i].1.clone()); // Push the name corresponding to the sorted tuple
-        }
-        
+        let res: Vec<String> = map.iter().map(|(_, name)| name.clone()).collect();
+
         // Return the result vector
         res
     }
