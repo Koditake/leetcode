@@ -1,31 +1,30 @@
 class Solution {
 public:
     int evalRPN(vector<string>& tokens) {
-        std::stack<int> decoder;
-
-        for (std::string &s:tokens) {
-            if (s.size() > 1 || isdigit(s[0])) {
-                decoder.push(stoi(s));
-            } else if (s == "+" || s == "-" || s == "*" || s == "/") {
-                int operandTwo = decoder.top();
-                decoder.pop();
-                int operandOne = decoder.top();
-                decoder.pop();
-                int result;
-
-                if (s == "+") {
-                    result = operandOne + operandTwo;
-                } else if (s == "-") {
-                    result = operandOne - operandTwo;
-                } else if (s == "*") {
-                    result = operandOne * operandTwo;
-                } else if (s == "/") {
-                    result = operandOne / operandTwo;
-                }
-                decoder.push(result);
+        stack<int> stk;
+        int n1, n2;
+        for (auto &tok:tokens) {
+            if (tok == "+") {
+                n2 = stk.top(); stk.pop();
+                n1 = stk.top(); stk.pop();
+                stk.push(n1 + n2);
+            } else if (tok == "-") {
+                n2 = stk.top(); stk.pop();
+                n1 = stk.top(); stk.pop();
+                stk.push(n1 - n2);
+            } else if (tok == "*") {
+                n2 = stk.top(); stk.pop();
+                n1 = stk.top(); stk.pop();
+                stk.push(n1 * n2);
+            } else if (tok == "/") {
+                n2 = stk.top(); stk.pop();
+                n1 = stk.top(); stk.pop();
+                stk.push(n1 / n2);
+            } else {
+                stk.push(stoi(tok));
             }
         }
-
-        return decoder.top();
+        
+        return stk.top();
     }
 };
