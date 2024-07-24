@@ -1,6 +1,6 @@
 class Solution {
 public:
-    auto switcharoo(std::vector<int> mapping, int num) -> int {
+    auto switcharoo(std::vector<int> &mapping, int num) -> int {
         int res = 0,
             pow10 = 1;
 
