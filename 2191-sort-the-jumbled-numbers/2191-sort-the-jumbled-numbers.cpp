@@ -1,17 +1,16 @@
 class Solution {
 public:
     auto switcharoo(std::vector<int> mapping, int num) -> int {
-        std::string str = std::to_string(num);
         int res = 0,
             pow10 = 1;
+
+        if (num == 0)
+            return mapping[num];
         
-        for (int i = str.size() - 1; i >= 0; --i) {
-            // convert according to mapping array with order of magnitude
-            int n = mapping[str[i] - '0'] * pow10;
-            // add to result;
-            res += n;
-            // increase order of magnitude for next iteration
+        while (num > 0) {
+            res += mapping[(num % 10)] * pow10;
             pow10 *= 10;
+            num /= 10;
         }
         
         return res;
