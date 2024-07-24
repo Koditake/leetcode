@@ -1,19 +1,28 @@
 class Solution {
 public:
+    auto switcharoo(vector<int>& mapping, int num) -> int {
+        if (num < 10)
+            return mapping[num];
+        
+        int res = 0,
+            pow10 = 1;
+        
+        while (num > 0) {
+            res += mapping[num%10] * pow10;
+            pow10 *= 10;
+            num /= 10;
+        }
+        
+        return res;
+    }
+    
     vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
-        vector<pair<int, int>> storePairs;
+        std::vector<pair<int, int>> storePairs;
 
         for (int i = 0; i < nums.size(); ++i) {
-            // Convert current value to string
-            string number = to_string(nums[i]);
-            string formed = "";
-            for (int j = 0; j < number.size(); ++j) {
-                formed = formed + (to_string(mapping[number[j] - '0']));
-            }
             // Store the mapped value.
-            int mappedValue = stoi(formed);
-            // Push a pair consisting of mapped value and original value;s
-            // index.
+            int mappedValue = switcharoo(mapping, nums[i]);
+            // Push a pair consisting of mapped value and original value's index.
             storePairs.push_back({mappedValue, i});
         }
 
