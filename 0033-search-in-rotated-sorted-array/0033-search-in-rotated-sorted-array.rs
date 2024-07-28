@@ -4,7 +4,6 @@ impl Solution {
     fn binary_search(nums: Vec<i32>, target: i32, mut l: i32, mut r: i32) -> i32 {
         while l < r {
             let m = l + (r - l)/2;
-            
             match nums[m as usize].cmp(&target) {
                 Less => l = m + 1,
                 Greater => r = m,
@@ -33,21 +32,21 @@ impl Solution {
             return Self::binary_search(nums,target,l,r);
         }
         
-        // Array was rotate -> find rotated point
+        // Array was rotated -> find rotated point
         while l < r {
             let m = l + (r - l)/2;
-            
             match nums[m as usize].cmp(&nums[n - 1]) {
                 Less => r = m,
                 _ => l = m + 1,
             };
         }
         
-        if (nums[0] <= target) {
-            return Self::binary_search(nums, target, 0, l);
-        } else {
-            return Self::binary_search(nums, target, l, n as i32 - 1);
-        }
+        // if nums[0] > target -> target is at the latter half of array
+        // else, target is at former half of array
+        match nums[0].cmp(&target) {
+            Greater => return Self::binary_search(nums, target, l, n as i32 - 1),
+            _ => return Self::binary_search(nums, target, 0, l),
+        };
         
         -1
     }
