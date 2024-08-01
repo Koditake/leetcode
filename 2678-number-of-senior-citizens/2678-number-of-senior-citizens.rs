@@ -3,8 +3,7 @@ impl Solution {
         let mut res = 0;
         
         for str in details {
-            let age:i32 = str[11..13].parse::<i32>().unwrap();
-            if age > 60 {
+            if str[11..13].parse::<i32>().unwrap() > 60 {
                 res += 1;
             }
         }
