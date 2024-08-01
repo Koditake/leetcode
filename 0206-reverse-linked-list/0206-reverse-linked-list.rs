@@ -1,29 +1,25 @@
-// Definition for singly-linked list.
-// #[derive(PartialEq, Eq, Clone, Debug)]
-// pub struct ListNode {
-//   pub val: i32,
-//   pub next: Option<Box<ListNode>>
-// }
-// 
-// impl ListNode {
-//   #[inline]
-//   fn new(val: i32) -> Self {
-//     ListNode {
-//       next: None,
-//       val
-//     }
-//   }
-// }
-impl Solution {
-    pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        let (mut prev, mut curr) = (None, head);
-        while let Some(mut node) = curr  {
-            curr = node.next;
-      
-            node.next = prev;
-            
-            prev = Some(node);
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode *cur = head,
+                *pre = nullptr;
+        while (cur) {
+            auto *temp = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = temp;
         }
-        prev
+        
+        return pre;
     }
-}
+};
