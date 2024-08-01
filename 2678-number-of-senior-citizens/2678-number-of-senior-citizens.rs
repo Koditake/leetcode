@@ -1,12 +1,14 @@
-class Solution {
-public:
-    int countSeniors(vector<string>& details) {
-        int res = 0;
-        for (auto &str:details) {
-            if ((str[11] - '0')*10 + (str[12] - '0') > 60)
-                ++res;
+impl Solution {
+    pub fn count_seniors(details: Vec<String>) -> i32 {
+        let mut res = 0;
+        
+        for str in details {
+            let age:i32 = str[11..13].parse::<i32>().unwrap();
+            if age > 60 {
+                res += 1;
+            }
         }
         
-        return res;
+        res
     }
-};
+}
