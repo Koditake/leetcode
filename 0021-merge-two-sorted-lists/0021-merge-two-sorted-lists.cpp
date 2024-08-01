@@ -40,8 +40,8 @@ public:
             cur = cur->next;
         }
         
-        if (!list1) cur->next = list2;
-        if (!list2) cur->next = list1;
+        if (!list1 ^ !list2)
+            cur->next = (!list1) ? list2:list1;
         
         return res;
     }
