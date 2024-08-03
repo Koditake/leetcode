@@ -4,16 +4,15 @@ public:
         if (arr.size() <= 1) 
             return target == arr;
         
-        unordered_map<int, int> imap;
+        sort(target.begin(),target.end());
+        sort(arr.begin(), arr.end());
         
         for (int i = 0; i < arr.size(); i++) {
-            ++imap[target[i]];
-            --imap[arr[i]];
-        }
-        
-        for (auto &[num,freq]:imap)
-            if (freq != 0)
+            if (target[i] != arr[i])
                 return false;
+            else
+                continue;
+        }
         
         return true;
     }
