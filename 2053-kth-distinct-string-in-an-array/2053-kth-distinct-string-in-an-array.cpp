@@ -1,31 +1,15 @@
 class Solution {
 public:
-    auto inline find_pos(vector<tuple<string,int>> &vtup, string &str, int pos = 0) -> int {
-        for (auto &[s,c]:vtup)
-            if (s == str) return pos;
-            else ++pos;
-        return -1;
-    }
-    
     string kthDistinct(vector<string>& arr, int k) {
-        std::vector<std::tuple<string,int>> vtup;
-        
-        for (auto &s:arr) {
-            int pos = find_pos(vtup,s);
-            if (pos == -1) {
-                vtup.push_back({s,1});
-            } else {
-                std::get<1>(vtup[pos]) += 1;
-            }
+        int co = 0;
+        for(int i = 0; i < arr.size(); i++) {
+            int c = 0;
+            for(int j = 0;j < arr.size(); j++)
+                if(arr[i] == arr[j])
+                    c++;
+            if (c == 1) co++;
+            if (co == k) return arr[i];
         }
-        
-        for (auto const &[s,c]:vtup) {
-            if (c == 1) {
-                if (k == 1) return s;
-                else --k;
-            }
-        }
-        
         return "";
     }
 };
