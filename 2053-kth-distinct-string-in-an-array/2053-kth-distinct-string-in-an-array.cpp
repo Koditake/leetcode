@@ -8,15 +8,14 @@ public:
     }
     
     string kthDistinct(vector<string>& arr, int k) {
-        std::unordered_set<string> uset;
         std::vector<std::tuple<string,int>> vtup;
         
         for (auto &s:arr) {
-            if (!uset.contains(s)) {
-                uset.insert(s);
+            int pos = find_pos(vtup,s);
+            if (pos == -1) {
                 vtup.push_back({s,1});
             } else {
-                std::get<1>(vtup[find_pos(vtup,s)]) += 1;
+                std::get<1>(vtup[pos]) += 1;
             }
         }
         
