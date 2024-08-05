@@ -1,24 +1,25 @@
 class Solution {
 public:
     int evalRPN(vector<string>& tokens) {
-        std::vector<int> store;
-        
-        for (auto &t:tokens) {
-            if (t.size() > 1 || isdigit(t[0])) {
-                store.push_back(stoi(t));
-            } else {
-                int n2 = store.back(); store.pop_back();
-                int n1 = store.back(); store.pop_back();
-                switch (t[0]) {
-                    case '+': store.push_back(n1 + n2); break;
-                    case '-': store.push_back(n1 - n2); break;
-                    case '*': store.push_back(n1 * n2); break;
-                    case '/': store.push_back(n1 / n2); break;
-                    defalt: continue; break;
+        stack<int> stn;
+        for(auto s:tokens) {
+            if(s.size()> 1 || isdigit(s[0])) 
+                //either s is a single digit or a multiple digits number
+                stn.push(stoi(s));
+            else {
+                auto x2=stn.top(); 
+                    stn.pop();
+                auto x1=stn.top(); 
+                    stn.pop();
+                switch(s[0]) {
+                    case '+': x1+=x2; break;
+                    case '-': x1-=x2; break;
+                    case '*': x1*=x2; break;
+                    case '/': x1/=x2; break;
                 }
+                stn.push(x1);
             }
         }
-        
-        return store.back();
+        return stn.top();
     }
 };
