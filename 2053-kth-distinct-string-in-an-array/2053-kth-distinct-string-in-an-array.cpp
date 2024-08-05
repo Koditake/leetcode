@@ -1,6 +1,6 @@
 class Solution {
 public:
-    auto find_pos(vector<tuple<string,int>> &vtup, string &str, int pos = 0) -> int {
+    auto inline find_pos(vector<tuple<string,int>> &vtup, string &str, int pos = 0) -> int {
         for (auto &[s,c]:vtup)
             if (s == str) return pos;
             else ++pos;
