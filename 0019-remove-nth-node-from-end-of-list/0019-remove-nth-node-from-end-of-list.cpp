@@ -15,7 +15,7 @@ public:
         *   We have two edges case:
         *   1. !head: LL did not existed -> simply return null
         *   2. !head->next: LL have only one node (head) 
-        *       and since n >= 1 (LL starting from 1) remove it would return null
+        *       and since n >= 1 (LL end starting from 1) remove it would return null
         */
         if (!head || !head->next) return nullptr;
         
