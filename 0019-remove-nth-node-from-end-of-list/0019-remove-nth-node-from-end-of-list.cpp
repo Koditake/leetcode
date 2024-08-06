@@ -14,7 +14,7 @@ public:
         if (!head || !head->next)
             return nullptr;
         
-        auto slow = head, fast = head;
+        auto slow = head, fast = head, slow_prev = slow;
         
         while (n > 0) {
             fast = fast->next;
@@ -24,12 +24,14 @@ public:
         if (!fast)
             return head->next;
         
-        while (fast->next) {
+        while (fast) {
+            slow_prev = slow;
             slow = slow->next;
             fast = fast->next;
         }
         
-        slow->next = slow->next->next;
+        slow_prev->next = slow->next;
+        slow = nullptr;
         return head;
     }
 };
