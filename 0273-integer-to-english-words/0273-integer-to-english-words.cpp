@@ -11,11 +11,13 @@ public:
     
     void solve(int num, int mag, vector<string> &res) {
         if (num == 0) {
+            //Edge case: 0
             res.push_back("Zero"); return;
         }
         
         while (num > 0) {
             if (num % 1000 == 0) {
+                // Check if this 10^3 block of num is just "000"
                 mag += 3;
                 num /= 1000;
             } else {
@@ -116,9 +118,6 @@ public:
                 mag += 1;
                 num /= 10;    
             }
-            
-            
-            
         }
     }
     
@@ -126,9 +125,9 @@ public:
         /***
         *   Ideas:
         *   -> every 1000 increase the "word" from "" to maximum "thousand billion"
-        *   -> magnitude "" 1-3 (0-999) -> "thounsand" 4-6 (1,000-999,999) -> "million" 7-9 (1,000,000-999,999,999)
-        *   -> "billion" 10-12 (1,000,000,000-999,999,999,999) 
-        *   -> "thounsand billion" 13 (1,000,000,000,000-2,147,483,647)
+        *   -> magnitude "" 1e0-3 (0-999) -> "thounsand" 1e4-6 (1,000-999,999) -> "million" 1e7-9 (1,000,000-999,999,999)
+        *   -> "billion" 1e10-12 (1,000,000,000-999,999,999,999) 
+        *   -> "thounsand billion" 1e13 (1,000,000,000,000-2,147,483,647)
         *   We only need to calculate the calling for every 3-digits block and tack on the magnitude calling
         */
         
