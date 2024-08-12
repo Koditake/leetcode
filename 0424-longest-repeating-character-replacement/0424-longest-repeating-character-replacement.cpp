@@ -4,7 +4,7 @@ public:
         int l = 0,
             r = 0;
         
-        int cvec[26] = {0};
+        std::array<int, 26> cvec = {0};
         
         int w_l = 0,
             w_c = 0;
