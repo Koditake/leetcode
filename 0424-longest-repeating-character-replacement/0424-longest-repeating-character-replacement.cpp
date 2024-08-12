@@ -1,26 +1,24 @@
 class Solution {
 public:
     int characterReplacement(string s, int k) {
-        int end = 0;
-        int start = 0;
+        int l = 0,
+            r = 0,
+            m_l = 0,
+            m_w = 0;
         
-        int max_len = 0;
-        int max_count_in_window = 0;
+        std::unordered_map<int,int> map;
         
-        unordered_map<char,int> count;
-        
-        for(end = 0; end < s.size(); end++)
-        {
-            count[s[end]]++;
-            max_count_in_window = max(count[s[end]], max_count_in_window);
-            if(end - start + 1 - max_count_in_window > k)
-            {
-                count[s[start]]--;
-                start++;
+        for (r; r < s.size(); ++r) {
+            ++map[s[r]];
+            m_w = max(m_w, map[s[r]]);
+            if (r - l + 1 - m_w > k) {
+                --map[s[l]];
+                ++l;
             }
-            max_len = max(max_len, end - start + 1);
+            
+            m_l = max(m_l, r - l + 1);
         }
         
-        return max_len;
+        return m_l;
     }
 };
