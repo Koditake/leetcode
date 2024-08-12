@@ -4,16 +4,16 @@ public:
         int l = 0,
             r = 0;
         
-        int w_c = 0,
-            w_l = 0;
+        int cvec[26] = {0};
         
-        std::unordered_map<int,int> cmap;
+        int w_l = 0,
+            w_c = 0;
         
         for (r; r < s.length(); ++r) {
-            ++cmap[s[r]];
-            w_c = std::max(w_c, cmap[s[r]]);
+            ++cvec[s[r] - 'A'];
+            w_c = std::max(w_c, cvec[s[r] - 'A']);
             if (r - l + 1 - w_c > k) {
-                --cmap[s[l]];
+                --cvec[s[l] - 'A'];
                 ++l;
             }
             w_l = std::max(w_l, r - l + 1);
