@@ -9,6 +9,7 @@
 class Solution {
 public:
     auto isCycle(ListNode *head) -> ListNode* {
+        if (!head) return nullptr;
         auto slow = head, fast = head;
         while (fast->next && fast->next->next) {
             slow = slow->next;
@@ -20,14 +21,15 @@ public:
     }
     
     ListNode *detectCycle(ListNode *head) {
-        if (!head || !isCycle(head)) return nullptr;
+        auto cyl = isCycle(head);
+        if (!head || !cyl) return nullptr;
         /** Idea:
         *   Run a third ptr fron head
         *   For every node of third ptr, run the cycle at normal speed.
         *   If a full cycle does not meet the third ptr, move to the next node.
         *   Repeat ad naseaum
         */
-        auto cur = head, cyl = isCycle(head);
+        auto cur = head;
         while (cur) {
             auto pre = cyl;
             do {
