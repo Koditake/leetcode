@@ -45,13 +45,9 @@ public:
         if (!head || !cyl) return nullptr;
         
         auto cur = head;
-        while (cur) {
-            auto pre = cyl;
-            do {
-                cyl = cyl->next;
-                if (cur == cyl) return cur;
-            } while (pre != cyl);
+        while (cur != cyl) {
             cur = cur->next;
+            cyl = cyl->next;
         }
         
         return cur;
