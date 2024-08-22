@@ -6,15 +6,19 @@ public:
         
         if (n1 > n2) return false;
         
-        vector<int> map1 (26,0);
-        for (auto const &c:s1) ++map1[c - 'a'];
-        for (int i = 0; i <= n2 - n1; ++i) {
-            vector<int> map2 (26,0); 
-            auto s2b = s2.substr(i, n1);
-            for (auto const &c:s2b) ++map2[c - 'a'];
-            if (map1 == map2) return true;
-        }
+        vector<int> vec1 (26,0);
         
+        for (auto const &c:s1) ++vec1[c - 'a'];
+        
+        int
+            r = 0;
+        
+        for (r; r <= n2 - n1; ++r) {
+            auto s2b = s2.substr(r,n1);
+            vector<int> tmp (26,0);
+            for (auto const &c:s2b) ++tmp[c - 'a'];
+            if (vec1 == tmp) return true;
+        }
         return false;
     }
 };
