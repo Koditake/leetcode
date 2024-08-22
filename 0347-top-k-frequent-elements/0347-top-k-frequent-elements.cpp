@@ -1,30 +1,22 @@
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        int n = nums.size();
+        unordered_map<int, int> nmap;
+        for (auto const &n:nums) ++nmap[n];
         
-        std::unordered_map<int, int> map;
-        std::vector<int> res;
-        for (auto &num:nums) {
-            map[num]++;
+        vector<vector<int>> vect (nums.size() + 1);
+        
+        for (auto &[num,freq]:nmap) {
+            vect[freq].push_back(num);
         }
         
-        std::vector<std::vector<int>> buckets (n + 1);
-        
-        
-        for (auto &[num,cnt]:map) {
-            buckets[cnt].push_back(num);
-        }
-        
-        for (int i = n; i >= 0; i--) {
-            if (res.size() >= k) {
-                break;
-            } 
-            if (!buckets[i].empty()) {
-                res.insert(res.end(), buckets[i].begin(), buckets[i].end());
+        vector<int> res;
+        for (int i = vect.size() - 1; i >= 0; --i) {
+            if (res.size() >= k) break;
+            if (!vect[i].empty()) {
+                res.insert(res.end(), vect[i].begin(), vect[i].end());
             }
         }
-        
         return res;
     }
 };
