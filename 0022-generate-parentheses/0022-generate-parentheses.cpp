@@ -1,18 +1,21 @@
 class Solution {
 public:
-    auto helper(std::string str, int o, int c, vector<string> &res) -> void {
-        if (!o && !c) {
-            res.push_back(str);
+    vector<string> generateParenthesis(int n) {
+        vector<string> result;
+        generate(n, 0, 0, "", result);
+        return result;
+    }
+private:
+    inline void generate(int n, int open, int close, string str, vector<string>& result) {
+        if (open == n && close == n) {
+            result.push_back(str);
             return;
         }
-        
-        if (o < c) helper(str + ")", o, c - 1, res);
-        if (o >= 0) helper(str + "(", o - 1, c, res);
-    }
-    
-    vector<string> generateParenthesis(int n) {
-        vector<string> res;
-        helper("", n, n, res);
-        return res;
+        if (open < n) {
+            generate(n, open + 1, close, str + '(', result);
+        }
+        if (open > close) {
+            generate(n, open, close + 1, str + ')', result);
+        }
     }
 };
