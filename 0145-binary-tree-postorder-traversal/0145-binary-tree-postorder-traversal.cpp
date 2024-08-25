@@ -14,7 +14,9 @@ public:
     auto helper(TreeNode *root, vector<int> &res) -> void {
         if (!root) return;
         helper(root->left, res);
+        root->left = nullptr;
         helper(root->right,res);
+        root->right = nullptr;
         res.push_back(root->val);
     }
     vector<int> postorderTraversal(TreeNode* root) {
