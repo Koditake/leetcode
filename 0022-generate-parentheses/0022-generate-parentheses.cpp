@@ -6,8 +6,8 @@ public:
             return;
         }
         
-        if (o < c) helper(str + ')', o, c - 1, res);
-        if (o >= 0) helper(str + '(', o - 1, c, res);
+        if (o < c) helper(str + ")", o, c - 1, res);
+        if (o >= 0) helper(str + "(", o - 1, c, res);
     }
     
     vector<string> generateParenthesis(int n) {
