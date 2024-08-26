@@ -20,10 +20,12 @@ public:
 
 class Solution {
 public:
-    auto helper(Node* root, vector<int> &res) -> void {
+    inline auto helper(Node* root, vector<int> &res) -> void {
         if (!root) return;
-        for (auto const &n:root->children)
+        for (auto &n:root->children) {
             helper(n,res);
+            n = nullptr;
+        }
         res.push_back(root->val);
     }
     vector<int> postorder(Node* root) {
