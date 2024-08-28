@@ -15,8 +15,7 @@ public:
         
         if (mp == ms) res.push_back(0);
         
-        int r = np;
-        for (r; r < ns; ++r) {
+        for (int r = np; r < ns; ++r) {
             ++ms[s[r] - 'a'];
             --ms[s[r - np] - 'a'];
             if (ms == mp) res.push_back(r - np + 1);
