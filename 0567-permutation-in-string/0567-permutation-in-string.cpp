@@ -1,8 +1,7 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        int l = 0, 
-            r = 0, 
+        int  
             n1 = s1.size(), 
             n2 = s2.size();
         
