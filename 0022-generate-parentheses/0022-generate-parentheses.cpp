@@ -1,21 +1,21 @@
 class Solution {
 public:
-    vector<string> generateParenthesis(int n) {
-        vector<string> result;
-        generate(n, 0, 0, "", result);
-        return result;
-    }
-private:
-    inline void generate(int n, int open, int close, string str, vector<string>& result) {
-        if (open == n && close == n) {
-            result.push_back(str);
+    void helper(int o, int c, string str, vector<string> &res) {
+        if (o == 0 && c == 0) {
+            res.push_back(str);
             return;
         }
-        if (open < n) {
-            generate(n, open + 1, close, str + '(', result);
-        }
-        if (open > close) {
-            generate(n, open, close + 1, str + ')', result);
-        }
+        
+        if (c > o)
+            helper(o, c - 1, str + ')', res);
+        
+        if (o > 0)
+            helper(o - 1, c, str + '(', res);
+    }
+    
+    vector<string> generateParenthesis(int n) {
+        vector<string> res; string str = "";
+        helper(n,n,str,res);
+        return res;
     }
 };
