@@ -39,6 +39,9 @@ public:
         if (track(head, root))
             return true;
 
-        return isSubPath(head, root->left) || isSubPath(head, root->right);
+        auto res = isSubPath(head, root->left) || isSubPath(head, root->right);
+        root->left = root->right = nullptr;
+        
+        return res;
     }
 };
