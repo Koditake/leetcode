@@ -11,13 +11,17 @@
  */
 class Solution {
 public:
+    auto inverse(TreeNode* root) -> void {
+        if (!root) return;
+        
+        std::swap(root->left,root->right);
+        inverse(root->left);
+        inverse(root->right);
+    }
     TreeNode* invertTree(TreeNode* root) {
         if (!root) return nullptr;
         
-        std::swap(root->left, root->right);
-        auto left = invertTree(root->left),
-            right = invertTree(root->right);
-        //root->left = root->right = nullptr;
+        inverse(root);
         
         return root;
     }
