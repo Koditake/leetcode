@@ -11,15 +11,14 @@
  */
 class Solution {
 public:
-    inline auto inverse(TreeNode* root) -> void {
-        if (!root) return;
-        inverse(root->left);
-        inverse(root->right);
-        std::swap(root->left,root->right);
+    void solution(TreeNode* root){
+        if(!root) return;
+        solution(root->left);
+         solution(root->right);
+       swap(root->left,root->right);
     }
     TreeNode* invertTree(TreeNode* root) {
-        inverse(root);
-        
+        solution(root);
         return root;
     }
 };
