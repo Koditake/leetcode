@@ -11,25 +11,53 @@
 class Solution {
 public:
     vector<ListNode*> splitListToParts(ListNode* head, int k) {
-        //reverse linked list, with a stack-like metastructure?
-        /*
-            reverse linked list, with a stack
-        */
-        
-        vector<ListNode*> parts(k, nullptr);
-        int len = 0;
-        for (auto node = head; node; node = node->next)
-            len++;
-        int n = len / k, r = len % k; // n : minimum guaranteed part size; r : extra nodes spread to the first r parts;
-        ListNode* node = head, *prev = nullptr;
-        for (int i = 0; node && i < k; i++, r--) {
-            parts[i] = node;
-            for (int j = 0; j < n + (r > 0); j++) {
-                prev = node;
-                node = node->next;
-            }
-            prev->next = nullptr;
+        vector<ListNode*> ans(k);
+
+        // get total size of linked list
+        int size = 0;
+        ListNode* current = head;
+        while (current != nullptr) {
+            size++;
+            current = current->next;
         }
-        return parts;
+
+        // minimum size for the k parts
+        int splitSize = size / k;
+
+        // Remaining nodes after splitting the k parts evenly.
+        // These will be distributed to the first (size % k) nodes
+        int numRemainingParts = size % k;
+
+        current = head;
+        ListNode* prev = current;
+        for (int i = 0; i < k; i++) {
+            // create the i-th part
+            ListNode* newPart = current;
+            // calculate size of i-th part
+            int currentSize = splitSize;
+            if (numRemainingParts > 0) {
+                numRemainingParts--;
+                currentSize++;
+            }
+
+            // traverse to end of new part
+            int j = 0;
+            while (j < currentSize) {
+                prev = current;
+                if (current != nullptr) {
+                    current = current->next;
+                }
+                j++;
+            }
+
+            // cut off the rest of linked list
+            if (prev != nullptr) {
+                prev->next = nullptr;
+            }
+
+            ans[i] = newPart;
+        }
+
+        return ans;
     }
 };
