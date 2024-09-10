@@ -10,6 +10,7 @@
  */
 class Solution {
 public:
+    /*
     ListNode *reverse(ListNode *head) {
         auto prev = head, curr = head;
         prev = nullptr;
@@ -22,6 +23,7 @@ public:
         
         return head;
     }
+    */
     
     int gcd(int a, int b) {
         while (b != 0) {
