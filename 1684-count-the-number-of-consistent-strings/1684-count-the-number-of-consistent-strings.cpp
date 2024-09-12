@@ -5,10 +5,10 @@ public:
         bool cset[26] = {false};
         for (auto const &c:allowed) cset[c - 'a'] = true;
         for (auto const &str:words) {
-            bool consistent = true;
+            int is_const = true;
             for (auto const &c:str)
-                if (!cset[c - 'a']) consistent = false;
-            if (consistent) ++res;
+                if (!cset[c - 'a']) is_const = false;
+            if (is_const) ++res;
         }
         
         return res;
