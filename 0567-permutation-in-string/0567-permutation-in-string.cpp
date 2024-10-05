@@ -4,14 +4,20 @@ public:
         int n1 = s1.size(),
             n2 = s2.size();
         
-        vector<int> m1 (26,0);
+        if (n2 < n1) return false;
         
-        for (auto const &c:s1) ++m1[c - 'a'];
+        vector<int> m1 (26,0), m2 (26,0);
         
-        for (int i = 0; i <= n2 - n1; ++i) {
-            vector<int> m2 (26,0);
-            auto st = s2.substr(i, n1);
-            for (auto const &c:st) ++m2[c - 'a'];
+        for (int i = 0; i < n1; ++i) {
+            ++m1[s1[i] - 'a'];
+            ++m2[s2[i] - 'a'];
+        } 
+        
+        if (m1 == m2) return true;
+        
+        for (int i = n1; i < n2; ++i) {
+            ++m2[s2[i] - 'a'];
+            --m2[s2[i - n1] - 'a'];
             if (m1 == m2) return true;
         }
         
