@@ -7,15 +7,15 @@ impl Solution {
         let (mut m1, mut m2) = (vec![0;26], vec![0;26]);
         
         for i in 0..n1 {
-            m1[(charr1[i] as u8 - 'a' as u8) as usize] += 1;
-            m2[(charr2[i] as u8 - 'a' as u8) as usize] += 1;
+            m1[charr1[i] as usize - 'a' as usize] += 1;
+            m2[charr2[i] as usize - 'a' as usize] += 1;
         }
         
         if m1 == m2 { return true; }
         
         for i in n1..n2 {
-            m2[(charr2[i] as u8 - 'a' as u8) as usize] += 1;
-            m2[(charr2[i - n1] as u8 - 'a' as u8) as usize] -= 1;
+            m2[charr2[i] as usize - 'a' as usize] += 1;
+            m2[charr2[i - n1] as usize - 'a' as usize] -= 1;
             if m1 == m2 { return true; }
         }
         
