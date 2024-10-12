@@ -1,18 +1,22 @@
-use std::cmp::Ordering::{Equal, Less, Greater};
+use std::cmp::Ordering::{Less,Greater};
 
 impl Solution {
     pub fn search(nums: Vec<i32>, target: i32) -> i32 {
-        let mut l = 0 as i32;
-        let mut r = nums.len() as i32 - 1;
+        if target < nums[0] || target > *nums.last().unwrap() { return -1; }
+        if nums.len() == 1 {
+            if target == nums[0] { return 0; }
+            else { return -1 };
+        }
         
-        while l <= r {
+        let (mut l, mut r) = (0, nums.len() as i32 - 1);
+        
+        while (l <= r) {
             let m = l + (r - l)/2;
-            let mid = nums[m as usize];
             
-            match mid.cmp(&target) {
+            match nums[m as usize].cmp(&target) {
                 Less => l = m + 1,
-                Equal => return m,
-                Greater => r = m - 1
+                Greater => r = m - 1,
+                _ => return m,
             }
         }
         
