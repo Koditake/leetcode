@@ -1,21 +1,20 @@
 class Solution {
-public:
-    void helper(int o, int c, string str, vector<string> &res) {
+    void generator(int o, int c, string seed, vector<string> &res) {
         if (o == 0 && c == 0) {
-            res.push_back(str);
+            res.push_back(seed);
             return;
         }
         
-        if (c > o)
-            helper(o, c - 1, str + ')', res);
-        
+        if (o < c)
+            generator(o, c - 1, seed + ')', res);
         if (o > 0)
-            helper(o - 1, c, str + '(', res);
+            generator(o - 1, c, seed + '(', res);
+        
     }
-    
+public:
     vector<string> generateParenthesis(int n) {
-        vector<string> res; string str = "";
-        helper(n,n,str,res);
+        vector<string> res;
+        generator(n,n,"",res);
         return res;
     }
 };
