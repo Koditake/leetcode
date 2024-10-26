@@ -1,44 +1,34 @@
 class MinStack {
-private:
-    std::stack<int> mainStack;
-    std::stack<int> subStack;
 public:
     MinStack() {
-        // default constructor
+        
+    }
+    
+    ~MinStack() {
+        
     }
     
     void push(int val) {
-        if (subStack.empty()) {
-            subStack.push(val);
-        } else 
-        if (subStack.top() >= val) {
-            subStack.push(val);
-        }
-
-        mainStack.push(val);
+        if (min.empty() || val <= min.top()) min.push(val);
+        main.push(val);
     }
     
     void pop() {
-        if (mainStack.top() == subStack.top() && !subStack.empty()) {
-            subStack.pop();
-        }
-
-        mainStack.pop();
+        if (!min.empty() && main.top() == min.top())
+            min.pop();
+        main.pop();
     }
     
     int top() {
-        if (!mainStack.empty())
-            return mainStack.top();
-        
-        return 0;
+        return main.top();
     }
     
     int getMin() {
-        if (!subStack.empty())
-            return subStack.top();
-        
-        return 0;
+        return min.top();
     }
+private:
+    stack<int> main;
+    stack<int> min;
 };
 
 /**
