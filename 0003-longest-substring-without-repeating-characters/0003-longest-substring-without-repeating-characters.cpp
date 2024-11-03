@@ -1,17 +1,20 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int l = 0, r = 0, n = s.size(), res = 0;
-        vector<bool> cmap (256, false);
+        unordered_set<char> cset;
+        
+        int l = 0, r = 0, n = s.length(), res = 0;
+        
         for (r; r < n; ++r) {
-            while (cmap[s[r]] == true) {
-                cmap[s[l]] = false;
+            while (cset.find(s[r]) != cset.end()) {
+                
+                cset.erase(s[l]);
                 ++l;
-            }
-            cmap[s[r]] = true;
+            } 
+            cset.insert(s[r]);
             res = max(res, r - l + 1);
         }
-        
+                
         return res;
     }
 };
