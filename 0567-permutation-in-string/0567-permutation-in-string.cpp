@@ -4,16 +4,23 @@ public:
         if (s1.length() > s2.length())
             return false;
         
-        unordered_map<char,int> m1;
+        vector<int> m1 (26,0),
+                    m2 (26,0);
         
-        for (auto const &c:s1) ++m1[c];
-        for (int i = 0; i <= s2.length() - s1.length(); ++i) {
-            unordered_map<char,int> m2;
-            auto sstr = s2.substr(i,s1.length());
-            for (auto const &c:sstr) ++m2[c];
+        for (int i = 0; i < s1.length(); ++i) {
+            ++m1[s1[i] - 'a'];
+            ++m2[s2[i] - 'a'];
+        }
+        
+        if (m1 == m2) return true;
+        
+        for (int i = s1.length(); i < s2.length(); ++i) {
+            --m2[s2[i - s1.length()] - 'a'];        
+            ++m2[s2[i] - 'a'];
             
             if (m1 == m2) return true;
-        }
+        }   
+        
         return false;
     }
 };
