@@ -15,9 +15,9 @@ public:
             return nullptr;
         }
         
-        ListNode *pre = nullptr, *cur = head;
+        ListNode *pre = nullptr, *cur = head, *tmp = nullptr;
         while (cur) {
-            auto tmp = cur->next;
+            tmp = cur->next;
             cur->next = pre;
             pre = cur;
             cur = tmp;
