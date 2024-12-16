@@ -1,7 +1,7 @@
 class Solution {
 public:
     int characterReplacement(string s, int k) {
-        //use a int array
+        //use an int array
         std::array<int,26> cmap;
         
         int l = 0, r = 0, m = 0, res = 0;
